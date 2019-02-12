@@ -11,5 +11,8 @@ en = WikiData::Category.new('Category:Members of the National Assembly (Panama)'
 es = WikiData::Category.new('Categoría:Políticos de Panamá', 'es').member_titles |
      WikiData::Category.new('Categoría:Diputados de Panamá', 'es').member_titles
 
-EveryPolitician::Wikidata.scrape_wikidata(names: { en: en, es: es })
+query = 'SELECT DISTINCT ?item { ?item wdt:P39 wd:Q21295996 }'
+ids = EveryPolitician::Wikidata.sparql(query)
+
+EveryPolitician::Wikidata.scrape_wikidata(ids: ids, names: { en: en, es: es })
 
